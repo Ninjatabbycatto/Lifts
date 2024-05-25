@@ -14,7 +14,7 @@ public class Main : MonoBehaviour
 
     public List<int> floorQueue = new List<int>();
 
-    private int[] elevatorpos = new int[7];
+    public int[] elevatorpos = new int[7];
     private int poscounter = 0;
 
     public static Main instance;    
@@ -109,7 +109,7 @@ public class Main : MonoBehaviour
             user.transform.position = passengercontroller.moveToMiddle(user.transform.position);
         }
 
-        //
+        //if user isnt waiting, press button and wait
         if (user.transform.position.x == 0f && !user.waiting) {
             user.goneToMiddle = true;
             Debug.Log("pressing button");
@@ -123,10 +123,10 @@ public class Main : MonoBehaviour
         }
         */
 
-
-        if (!passengercontroller.user[0].inElevator){
+        //if user is not in elevator, and waiting, wait till elevator is == to pos
+        if (!user.inElevator){
             foreach(int pos in elevatorpos) {
-                if (user.getCurrent() == pos ) {
+                if (user.getCurrent() == pos && elevatorcontroller.elevators[poscounter].isIdle()) {
                     user.transform.position = passengercontroller.moveToElevator(user.transform.position, elevatorcontroller.elevators[poscounter].transform.position);
                     user.inLift = poscounter;
                     Debug.Log("Position assigned to user[0]: " + poscounter);
@@ -136,16 +136,16 @@ public class Main : MonoBehaviour
         }
         poscounter = 0;
 
-        Debug.Log("Floorqueuenum" + floorQueue[0]);
+        //Debug.Log("Floorqueuenum" + floorQueue[0]);
+        //if user is in elevator, press button
         if (user.transform.position.z == 0) {
-            
             Debug.Log("target pressed in elevator " +  !user.elevatorTargetPressed);
             Debug.Log("elevator pos from here: " + user.inLift);
             user.inElevator = true;
             user.transform.position = new Vector3 (user.transform.position.x, elevatorcontroller.elevators[user.inLift].transform.position.y + 0.97f, user.transform.position.z);
             if (!user.elevatorTargetPressed) {
                 user.elevatorTargetPressed = true;
-                floorQueue.Add(user.getTarget());
+                elevatorcontroller.elevators[user.inLift].queue.Add(user.getTarget());
                 Debug.Log("Queue added" +  user.getTarget());
                 Debug.Log("Queue removed: " + floorQueue[0]);  ///fix this to remove the certain queue number 
                 floorQueue.Remove(user.getCurrent());
@@ -154,11 +154,11 @@ public class Main : MonoBehaviour
             }
 
         }
-        //passenger walks to middle 
+        //passenger walks outside
         if (user.getTarget() == elevatorcontroller.elevators[user.inLift].getCurrentFloorIndex() && elevatorcontroller.elevators[user.inLift].isIdle()) {
             user.success = true;
             user.waiting = false;
-            floorQueue.Remove(user.getCurrent());
+            elevatorcontroller.elevators[user.inLift].queue.Remove(user.getTarget());
             StartCoroutine(StopForSeconds(5f));
             user.transform.position = passengercontroller.moveToMiddle(user.transform.position);
             elevatorcontroller.elevators[user.inLift].passengerCount--;

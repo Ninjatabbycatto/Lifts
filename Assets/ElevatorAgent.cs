@@ -26,6 +26,7 @@ public class ElevatorAgent : Agent {
         //mainScript = Main.instance;     //does not work if not on OnEpisodeBegin
         mainScript = FindObjectOfType<Main>();
         ActivePassengers = 0;
+
     }
 
     public override void OnEpisodeBegin() {
@@ -33,8 +34,8 @@ public class ElevatorAgent : Agent {
         Debug.Log("Active Passengers" + ActivePassengers);
         //mainScript = GetComponent<Main>();  
         episodes++;
-        if (ActivePassengers < 3) {     ///change if how many passengers can be active at once
-            Debug.Log("Creating passenger on elevator Agent");
+        if (ActivePassengers < 4) {     ///change if how many passengers can be active at once
+            //Debug.Log("Creating passenger on elevator Agent");
             ActivePassengers++;
             mainScript.passengercontroller.createRandomPassenger();
         }
@@ -64,7 +65,22 @@ public class ElevatorAgent : Agent {
             sensor.AddObservation(floor);
             Debug.Log("Observing floor" + floor);
         }
-        sensor.AddObservation(mainScript.passengerWaitingTime(0));
+        //sensor.AddObservation(mainScript.passengerWaitingTime(0));
+
+        foreach (int pos in mainScript.elevatorpos) {
+            sensor.AddObservation(pos);
+        }
+        foreach(passenger user in mainScript.passengercontroller.user) {
+            sensor.AddObservation(user.inLift);
+        }
+        foreach(Elevator lift in mainScript.elevatorcontroller.elevators) {
+            foreach (int queue in lift.queue) {
+                sensor.AddObservation(queue);
+                sensor.AddOneHotObservation(lift.getCurrentFloorIndex(), 44);
+            }
+        }
+        
+
         Debug.Log("512 PassengerWaitingTime: " + mainScript.passengerWaitingTime(0));
 
     }
@@ -77,6 +93,9 @@ public class ElevatorAgent : Agent {
             mainScript.elevatorcontroller.controlElevator(eNum, tFloor);
         }
 
+        AddReward(-0.00002f);
+
+
         
         //foreach(Elevator elevator in  mainScript.elevatorcontroller.elevators) {
 //
@@ -88,19 +107,23 @@ public class ElevatorAgent : Agent {
         //        break;          //break so discrete actions can only be applieed one at a time
         //    }
         //}
+
+        
         
         foreach(passenger user in mainScript.passengercontroller.user) {
             //this ends episode prematurely 
             Debug.Log("checking passenger " + user.passengernumber);
             if (user.success && !user.ignore) {
                 ActivePassengers--;
-                AddReward(10f - (mainScript.passengerWaitingTime(user.passengernumber) * 0.001f));
-                Debug.Log("Giving Reward: " + (10f - (mainScript.passengerWaitingTime(user.passengernumber) * 0.001f)));
+                AddReward(0.5f);
+                Debug.Log("Giving Reward: ");
                 user.ignore = true;
+                
+            }
+            if (user.ignore) {
                 Destroy(user.gameObject);
                 mainScript.passengercontroller.user.Remove(user);
                 Debug.Log("EndingEpisode");
-                
                 EndEpisode();
             }
         }

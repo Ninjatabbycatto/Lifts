@@ -30,6 +30,8 @@ public class Elevator : MonoBehaviour
     private Rigidbody rb;
     new private ConstantForce constantForce;
     private Vector3 velocity;
+    
+    public List<int> queue = new List<int>();
 
 
     void Start() {

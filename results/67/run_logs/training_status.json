@@ -1,0 +1,29 @@
+{
+    "CaterPassengers": {
+        "checkpoints": [
+            {
+                "steps": 77644,
+                "file_path": "results/67/CaterPassengers/CaterPassengers-77644.onnx",
+                "reward": -0.4500834345817566,
+                "creation_time": 1716619276.468993,
+                "auxillary_file_paths": [
+                    "results/67/CaterPassengers/CaterPassengers-77644.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 77644,
+            "file_path": "results/67/CaterPassengers.onnx",
+            "reward": -0.4500834345817566,
+            "creation_time": 1716619276.468993,
+            "auxillary_file_paths": [
+                "results/67/CaterPassengers/CaterPassengers-77644.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0.dev0",
+        "torch_version": "2.2.1"
+    }
+}
