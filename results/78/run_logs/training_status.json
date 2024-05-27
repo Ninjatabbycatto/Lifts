@@ -2,22 +2,22 @@
     "CaterPassengers": {
         "checkpoints": [
             {
-                "steps": 83486,
-                "file_path": "results/78/CaterPassengers/CaterPassengers-83486.onnx",
-                "reward": 0.33145999861881137,
-                "creation_time": 1716632491.546144,
+                "steps": 310935,
+                "file_path": "results/78/CaterPassengers/CaterPassengers-310935.onnx",
+                "reward": null,
+                "creation_time": 1716719700.2077491,
                 "auxillary_file_paths": [
-                    "results/78/CaterPassengers/CaterPassengers-83486.pt"
+                    "results/78/CaterPassengers/CaterPassengers-310935.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 83486,
+            "steps": 310935,
             "file_path": "results/78/CaterPassengers.onnx",
-            "reward": 0.33145999861881137,
-            "creation_time": 1716632491.546144,
+            "reward": null,
+            "creation_time": 1716719700.2077491,
             "auxillary_file_paths": [
-                "results/78/CaterPassengers/CaterPassengers-83486.pt"
+                "results/78/CaterPassengers/CaterPassengers-310935.pt"
             ]
         }
     },

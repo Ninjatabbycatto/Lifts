@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Unity.MLAgents;
+using Unity.MLAgents.Sensors;
+using Unity.MLAgents.Actuators;
+
+
 public class Main : MonoBehaviour
 {
 
@@ -16,6 +21,8 @@ public class Main : MonoBehaviour
 
     public int[] elevatorpos = new int[7];
     private int poscounter = 0;
+
+    
 
     public static Main instance;    
 
@@ -142,14 +149,14 @@ public class Main : MonoBehaviour
             Debug.Log("target pressed in elevator " +  !user.elevatorTargetPressed);
             Debug.Log("elevator pos from here: " + user.inLift);
             user.inElevator = true;
+            
             user.transform.position = new Vector3 (user.transform.position.x, elevatorcontroller.elevators[user.inLift].transform.position.y + 0.97f, user.transform.position.z);
             if (!user.elevatorTargetPressed) {
                 user.elevatorTargetPressed = true;
                 elevatorcontroller.elevators[user.inLift].queue.Add(user.getTarget());
-                Debug.Log("Queue added" +  user.getTarget());
-                Debug.Log("Queue removed: " + floorQueue[0]);  ///fix this to remove the certain queue number 
-                floorQueue.Remove(user.getCurrent());
                 elevatorcontroller.elevators[user.inLift].passengerCount++;
+                user.giveReward = true;
+                floorQueue.Remove(user.getCurrent());
                 
             }
 

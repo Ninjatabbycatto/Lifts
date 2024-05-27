@@ -112,10 +112,16 @@ public class ElevatorAgent : Agent {
         
         foreach(passenger user in mainScript.passengercontroller.user) {
             //this ends episode prematurely 
+            if (user.giveReward == true) {
+                user.giveReward = false;
+                AddReward(0.25f);
+            }
+
+
             Debug.Log("checking passenger " + user.passengernumber);
             if (user.success && !user.ignore) {
                 ActivePassengers--;
-                AddReward(0.5f);
+                AddReward(0.35f);
                 Debug.Log("Giving Reward: ");
                 user.ignore = true;
                 
@@ -126,6 +132,7 @@ public class ElevatorAgent : Agent {
                 Debug.Log("EndingEpisode");
                 EndEpisode();
             }
+
         }
     }
 

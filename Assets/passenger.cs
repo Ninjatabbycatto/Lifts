@@ -12,7 +12,8 @@ public class passenger : MonoBehaviour
                 goneToMiddle = false, 
                 inElevator = false,
                 elevatorTargetPressed = false, 
-                ignore = false;
+                ignore = false,
+                giveReward = false;
 
     public int inLift = 0;
     public Vector3 spawnPosition;
