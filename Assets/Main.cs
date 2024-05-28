@@ -83,11 +83,11 @@ public class Main : MonoBehaviour
             elevatorcontroller.floors[user.getCurrent()].goingUp();
             floorQueue.Add(user.getCurrent());
             user.waiting = true;
-            Debug.Log("UpButton pressed"); 
+        //    Debug.Log("UpButton pressed"); 
         }
         else if (user.getCurrent() > user.getTarget()){
             elevatorcontroller.floors[user.getCurrent()].goingDown();
-            Debug.Log("downButton pressed");
+        //    Debug.Log("downButton pressed");
             floorQueue.Add(user.getCurrent());
             user.waiting = true;
         }
@@ -103,7 +103,7 @@ public class Main : MonoBehaviour
         yield return new WaitForSeconds(seconds);
 
         // Code execution resumes after the specified delay
-        Debug.Log("Resuming code execution after 5 seconds");
+        //Debug.Log("Resuming code execution after 5 seconds");
     }
 
     public float passengerWaitingTime(int passengerNumber) {
@@ -119,7 +119,7 @@ public class Main : MonoBehaviour
         //if user isnt waiting, press button and wait
         if (user.transform.position.x == 0f && !user.waiting) {
             user.goneToMiddle = true;
-            Debug.Log("pressing button");
+            //Debug.Log("pressing button");
             pressbutton(user);
             
         }
@@ -136,7 +136,7 @@ public class Main : MonoBehaviour
                 if (user.getCurrent() == pos && elevatorcontroller.elevators[poscounter].isIdle()) {
                     user.transform.position = passengercontroller.moveToElevator(user.transform.position, elevatorcontroller.elevators[poscounter].transform.position);
                     user.inLift = poscounter;
-                    Debug.Log("Position assigned to user[0]: " + poscounter);
+                    //Debug.Log("Position assigned to user[0]: " + poscounter);
                 }
                 poscounter++;
             }
@@ -146,8 +146,8 @@ public class Main : MonoBehaviour
         //Debug.Log("Floorqueuenum" + floorQueue[0]);
         //if user is in elevator, press button
         if (user.transform.position.z == 0) {
-            Debug.Log("target pressed in elevator " +  !user.elevatorTargetPressed);
-            Debug.Log("elevator pos from here: " + user.inLift);
+            //Debug.Log("target pressed in elevator " +  !user.elevatorTargetPressed);
+            //Debug.Log("elevator pos from here: " + user.inLift);
             user.inElevator = true;
             
             user.transform.position = new Vector3 (user.transform.position.x, elevatorcontroller.elevators[user.inLift].transform.position.y + 0.97f, user.transform.position.z);
@@ -169,7 +169,7 @@ public class Main : MonoBehaviour
             StartCoroutine(StopForSeconds(5f));
             user.transform.position = passengercontroller.moveToMiddle(user.transform.position);
             elevatorcontroller.elevators[user.inLift].passengerCount--;
-            Debug.Log("removing from queue" + user.getCurrent());
+            //Debug.Log("removing from queue" + user.getCurrent());
             
             
             
@@ -177,7 +177,7 @@ public class Main : MonoBehaviour
 
         if(user.transform.position.x == 0f && user.success) {
             passengercontroller.stopTimer(user); ///you can now get the waitingTime
-            Debug.Log("378 passenger elapsedTime waiting" + user.waitingTime);
+        //    Debug.Log("378 passenger elapsedTime waiting" + user.waitingTime);
            //passengercontroller.removePassenger(user.passengernumber);
         }
 
@@ -189,12 +189,12 @@ public class Main : MonoBehaviour
     {
         updateElevatorFloors();
 
-        Debug.Log("FloorQueue" + floorQueue);
+        //Debug.Log("FloorQueue" + floorQueue);
 
         ////--------- User zone---------------------
         foreach (passenger user in passengercontroller.user) {
             if (!user.success){
-                Debug.Log("Updating passenger " + user.passengernumber);
+        //        Debug.Log("Updating passenger " + user.passengernumber);
                 passengermovements(user);
             }
         }

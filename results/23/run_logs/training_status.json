@@ -1,0 +1,38 @@
+{
+    "CaterPassengers": {
+        "checkpoints": [
+            {
+                "steps": 499947,
+                "file_path": "results/23/CaterPassengers/CaterPassengers-499947.onnx",
+                "reward": 0.1579600041732192,
+                "creation_time": 1716900355.064176,
+                "auxillary_file_paths": [
+                    "results/23/CaterPassengers/CaterPassengers-499947.pt"
+                ]
+            },
+            {
+                "steps": 500011,
+                "file_path": "results/23/CaterPassengers/CaterPassengers-500011.onnx",
+                "reward": 0.1579600041732192,
+                "creation_time": 1716900355.084805,
+                "auxillary_file_paths": [
+                    "results/23/CaterPassengers/CaterPassengers-500011.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 500011,
+            "file_path": "results/23/CaterPassengers.onnx",
+            "reward": 0.1579600041732192,
+            "creation_time": 1716900355.084805,
+            "auxillary_file_paths": [
+                "results/23/CaterPassengers/CaterPassengers-500011.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0.dev0",
+        "torch_version": "2.2.1"
+    }
+}

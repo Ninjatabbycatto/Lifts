@@ -108,7 +108,7 @@ public class ElevatorController : MonoBehaviour
         foreach(Elevator elevator in elevators) {
             elevator.setCurrentFloorIndex(updatedFloor(elevator)); //inefficient way to get the current floor of the elevator.
         }
-        showElevatorInfo(elevators[0]);
+        //showElevatorInfo(elevators[0]);
     }
 
 }

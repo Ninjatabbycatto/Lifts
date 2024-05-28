@@ -45,6 +45,9 @@ public class Elevator : MonoBehaviour
         idleTime = 9f;
         currentFloorIndex = 0;
     }
+    public bool getIdle() {
+        return idle;
+    }
 
     private bool ignoreDecelerate() {
         if(Mathf.Abs(velocity[1]) < 2f) {
@@ -83,7 +86,7 @@ public class Elevator : MonoBehaviour
         yield return new WaitForSeconds(seconds);
 
         // Code execution resumes after the specified delay
-        Debug.Log("Resuming code execution after 5 seconds");
+        //Debug.Log("Resuming code execution after 5 seconds");
     }
 
     private void goIdle() {
@@ -208,7 +211,7 @@ public class Elevator : MonoBehaviour
 
     //called once per frame
     void Update() {
-        showInfo();
+        //showInfo();
         velocitybefore = velocity [1];
         velocity = rb.velocity;
         yPosition = transform.position.y;

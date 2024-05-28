@@ -66,7 +66,7 @@ public class PassengerController : MonoBehaviour {
 
 
     public void setSpawnPosition(passenger person) {
-        Debug.Log("new position = " + person.spawnPosition);
+        //Debug.Log("new position = " + person.spawnPosition);
         Vector3 newPosition = new Vector3(8.16f, (person.getCurrent() * 2.5f) + 1.16f, -1.05f);
         person.spawnSet = true;
         person.spawnPosition = newPosition;       //😳😳
@@ -140,7 +140,7 @@ public class PassengerController : MonoBehaviour {
     }
 
     public Vector3 moveToMiddle(Vector3 currentpos) {
-        Debug.Log("Moving to middle");
+        //Debug.Log("Moving to middle");
         Vector3 targetposition = new Vector3(0f, currentpos.y, -1.05f);
         float movespeed = 3.5f;
 
@@ -166,26 +166,26 @@ public class PassengerController : MonoBehaviour {
         float movespeed = 2f;
         var step = movespeed * Time.deltaTime;
         Vector3 newPosition = Vector3.MoveTowards(currentpos, targetposition, step);
-        Debug.Log("Calculating new zPos\nCurrentpos = " + currentpos + 
-                  "\nelevatorPos = " + elevatorPos +
-                  "\ntargetPosition = " + targetposition + 
-                  "\nnewPosition = " + newPosition);
+        //Debug.Log("Calculating new zPos\nCurrentpos = " + currentpos + 
+        //          "\nelevatorPos = " + elevatorPos +
+        //          "\ntargetPosition = " + targetposition + 
+        //          "\nnewPosition = " + newPosition);
         return newPosition;
     }
 
     public Vector3 moveToElevator(Vector3 currentpos, Vector3 elevatorPos) {
-            Debug.Log("currentPos = " + currentpos.x + 
-                      "\nelevatorPos = " + elevatorPos.x + 
-                      "\ndifference = " + Mathf.Abs(currentpos.x - elevatorPos.x));
+        //    Debug.Log("currentPos = " + currentpos.x + 
+        //              "\nelevatorPos = " + elevatorPos.x + 
+        //              "\ndifference = " + Mathf.Abs(currentpos.x - elevatorPos.x));
         
         if (Mathf.Abs(currentpos.x - elevatorPos.x) >= 0.1f && !lockXComponent ){    
-            Debug.Log("Moving xComponent to elevator");
+        //    Debug.Log("Moving xComponent to elevator");
             Vector3 newpos = xComponent(currentpos, elevatorPos);
             return newpos;
         }
         else /*if (Mathf.Abs(currentpos.x - elevatorPos.x) <= 0.4f)*/ {
             lockXComponent = true;
-            Debug.Log("Moving zComponent to elevator");
+        //    Debug.Log("Moving zComponent to elevator");
             Vector3 newpos = zComponent(currentpos, elevatorPos);
             return newpos;
         }
@@ -203,7 +203,7 @@ public class PassengerController : MonoBehaviour {
     public void startTimer(passenger user) {
         
         user.startTime = Time.time;
-        Debug.Log("Timer Started: " + user.startTime);
+        //Debug.Log("Timer Started: " + user.startTime);
     }
 
     public void stopTimer(passenger passenger) {
@@ -220,7 +220,7 @@ public class PassengerController : MonoBehaviour {
                //move person to middle
     foreach (passenger person in user)
     if(person.waiting) {
-        Debug.Log("Calculating elapsedTime");
+        //Debug.Log("Calculating elapsedTime");
         person.elapsedTime = Time.time - person.startTime;
     }
 

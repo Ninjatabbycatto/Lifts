@@ -27,10 +27,6 @@ public class passenger : MonoBehaviour
 
 
     private void Start() {
-       Debug.Log("Passenger Number: " + passengernumber + 
-                  "\nTargetFloor" + targetFloor + 
-                  "\nCurrentFloor" + currentFloor);
-
         moveToSpawnPosition();
     }
 
@@ -69,16 +65,7 @@ public class passenger : MonoBehaviour
     
 
     void update() {
-        Debug.Log("Passenger Number: " + passengernumber + 
-                  "\nTargetFloor" + targetFloor + 
-                  "\nCurrentFloor" + currentFloor);
 
-
-        Debug.Log("378 Time Details \n" +
-                  "StartTime: " + startTime + 
-                  "\nelapsedTime: " + elapsedTime+ 
-                  "\nwaitingTime: " + waitingTime);
-        
         
 
         if (!spawnSet) {            //add spawnset to passsenger class and put this into for each loop

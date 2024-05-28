@@ -34,7 +34,7 @@ public class ElevatorAgent : Agent {
         Debug.Log("Active Passengers" + ActivePassengers);
         //mainScript = GetComponent<Main>();  
         episodes++;
-        if (ActivePassengers < 4) {     ///change if how many passengers can be active at once
+        if (ActivePassengers < 7) {     ///change if how many passengers can be active at once
             //Debug.Log("Creating passenger on elevator Agent");
             ActivePassengers++;
             mainScript.passengercontroller.createRandomPassenger();
@@ -74,9 +74,10 @@ public class ElevatorAgent : Agent {
             sensor.AddObservation(user.inLift);
         }
         foreach(Elevator lift in mainScript.elevatorcontroller.elevators) {
+            sensor.AddOneHotObservation(lift.getCurrentFloorIndex(), 44);
+            sensor.AddObservation(lift.getIdle());
             foreach (int queue in lift.queue) {
                 sensor.AddObservation(queue);
-                sensor.AddOneHotObservation(lift.getCurrentFloorIndex(), 44);
             }
         }
         
