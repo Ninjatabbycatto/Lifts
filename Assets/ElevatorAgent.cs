@@ -94,7 +94,7 @@ public class ElevatorAgent : Agent {
             mainScript.elevatorcontroller.controlElevator(eNum, tFloor);
         }
 
-        AddReward(-0.00002f);
+        AddReward(-0.000035f);
 
 
         
